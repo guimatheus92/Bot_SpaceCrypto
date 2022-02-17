@@ -268,9 +268,9 @@ async def remove_ships_from_fight(app_name=''):
         # Move mouse in a random place first
         move_mouse_random()
         while True:
-            if pyautogui.locateOnScreen(CloseImgBtn, grayscale=True, confidence=0.8) != None:
+            if pyautogui.locateOnScreen(CloseImgBtn, confidence=0.8) != None:
                 # Move to location               
-                pyautogui.moveTo(pyautogui.locateOnScreen(CloseImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)                
+                pyautogui.moveTo(pyautogui.locateOnScreen(CloseImgBtn, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)                
                 pyautogui.click()
                 remove_flag = True
             else:
