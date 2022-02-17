@@ -353,7 +353,7 @@ async def send_ships_to_fight(app_name=''):
         if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
             # Choose ships first
             while True:
-                buttons = list(pyautogui.locateAllOnScreen(FightImgBtn, grayscale=True, confidence=0.99))
+                buttons = list(pyautogui.locateAllOnScreen(FightImgBtn, confidence=0.99))
                 if pyautogui.locateOnScreen(FullShipsImg, grayscale=True, confidence=0.95) != None:
                     break
                 elif clicks_count > clicks:
