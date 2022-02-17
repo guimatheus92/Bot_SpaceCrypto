@@ -143,7 +143,10 @@ def send_telegram_pic(image):
             chat_id = telegram_chatid
         
         TelegramBot = start_telegram()
-        TelegramBot.send_photo(chat_id=chat_id, photo=open(image, 'rb'))
+        try:
+            TelegramBot.send_photo(chat_id=chat_id, photo=open(image, 'rb'))
+        except:
+            pass
 
         
 def take_screenshot(folder='', sub_folder='', info = ''):
