@@ -239,17 +239,19 @@ async def fight_boss(app_name=''):
 async def confirm_button(app_name=''):
     
     logger = setup_logger(telegram_integration=True, bot_name=app_name)
-    ConfirmImgBtn = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'confirm-btn.png')
+    images = ['confirm-btn.png', 'confirm-btn2.png']
+    for image in images:
+        ConfirmImgBtn = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', image)
+        # Click on 'Confirm' button if applicable because the boss might loss
+        if pyautogui.locateOnScreen(ConfirmImgBtn, grayscale=True, confidence=0.8) != None:
+            # Move to location
+            pyautogui.moveTo(pyautogui.locateOnScreen(ConfirmImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.2,0.4), pyautogui.easeInOutQuad)
+            # Click on Treasure Hunt game mode
+            pyautogui.click()
+            logger.info('Confirm buttom clicked..')
+            await asyncio.sleep(np.random.uniform(0.3,0.6))
+            return
 
-    # Click on 'Confirm' button if applicable because the boss might loss
-    if pyautogui.locateOnScreen(ConfirmImgBtn, grayscale=True, confidence=0.8) != None:
-        # Move to location
-        pyautogui.moveTo(pyautogui.locateOnScreen(ConfirmImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.2,0.4), pyautogui.easeInOutQuad)
-        # Click on Treasure Hunt game mode
-        pyautogui.click()
-        logger.info('Confirm buttom clicked..')
-        await asyncio.sleep(np.random.uniform(0.3,0.6))
-        return
 
 async def remove_ships_from_fight(app_name=''):
 
