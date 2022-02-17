@@ -1,0 +1,163 @@
+#**************************** SpaceCrypto Bot *******************************#
+#────────────────────────────────────────────────────────────────────────────#
+#─██████████████─██████████████─██████████████─██████████████─██████████████─#
+#─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─#
+#─██░░██████████─██░░██████░░██─██░░██████░░██─██░░██████████─██░░██████████─#
+#─██░░██─────────██░░██──██░░██─██░░██──██░░██─██░░██─────────██░░██─────────#
+#─██░░██████████─██░░██████░░██─██░░██████░░██─██░░██─────────██░░██████████─#
+#─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░██─────────██░░░░░░░░░░██─#
+#─██████████░░██─██░░██████████─██░░██████░░██─██░░██─────────██░░██████████─#
+#─────────██░░██─██░░██─────────██░░██──██░░██─██░░██─────────██░░██─────────#
+#─██████████░░██─██░░██─────────██░░██──██░░██─██░░██████████─██░░██████████─#
+#─██░░░░░░░░░░██─██░░██─────────██░░██──██░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─#
+#─██████████████─██████─────────██████──██████─██████████████─██████████████─#
+#────────────────────────────────────────────────────────────────────────────#
+#****************************************************************************#
+#*************** Please donate to help improve the hard work ♥ **************#
+#****************************************************************************#
+#** BUSD/BCOIN/ETH/BNB (BEP20): 0xf1e43519fca44d9308f889baf99531ed0de903fc **#
+#** PayPal: https://www.paypal.com/donate/?hosted_button_id=82CABN6CYVG6U ***#
+#*********** Nubank: https://nubank.com.br/pagar/1jxcl/z5fyuL6S28 ***********#
+#**************** Pix: 42a762ed-e6ec-4059-a88e-f168b9fbc63f *****************#
+#****************************************************************************#
+
+# [en]
+# ---- Configurations related to bot ----
+bot_options:
+  # [en]
+  # ---- Delete log files ----
+  # Default value: True
+  # Available options:
+  # True = Create log files
+  # False = Don't create log files
+  create_logfiles: True
+
+  # [en]
+  # ---- Delete log files ----
+  # Default value: False
+  # Available options:
+  # True = Delete all log files unless today's date
+  # False = Keep all log files unless today's date
+  delete_old_logfiles: False
+
+  # [en]
+  # ---- Delete log files ----
+  # Default value: False
+  # Available options:
+  # True = Delete all old folders unless today's date
+  # False = Keep all old folders unless today's date
+  delete_old_folders: False
+
+  # [en]
+  # ---- Enable multiaccount ----
+  # Default value: False
+  # Available options:
+  # True = Enable multiaccount for this bot
+  # False = Don't enable multiaccount for this bot
+  # If you enable multiaccount, don't forget to set the profile names below
+  enable_multiaccount: False
+
+  # [en]
+  # ---- Open the web browser automatically ----
+  # Default value: False
+  # Type: String
+  # Default value: 'Example'
+  multiaccount_names:
+    - 'Example'
+
+  # [en]
+  # ---- Refresh browser page ----
+  # Default value: 60 (minutes)
+  # Available options:
+  # Any value starting from 30
+  # Remember that refreshing the page takes time, so becarefull with the number you set
+  refresh_browser_time: 60
+
+  metamask_options:
+    # [en]
+    # ---- Enable login in Metamask ----
+    # Default value: False
+    # Available options:
+    # True = Enable login in Metamask when locked
+    # False = Don't enable bot to login in Metamask when locked
+    enable_login_metamask: False
+
+    # [en]
+    # ---- Metamask Password ----
+    # Type: String
+    # Default value: Null
+    metamask_password: Null
+
+# [en]
+# ---- Configurations related to telegram ----
+telegram_options:
+
+  # [en]
+  # ---- Telegram integration with log files ----
+  # Default value: False
+  # Available options:
+  # True = Use telegram to receive messages according log process
+  # False = Don't use telegram to receive messages according log process
+  telegram_integration: False
+
+  # [en]
+  # ---- Telegram token ----
+  # Type: String
+  # Default value: 'Example'
+  telegram_token: 'Example'
+
+  # [en]
+  # ---- Telegram chat id ----
+  # Default value: Null
+  # To get chat id manually, go to https://api.telegram.org/bot<telegram_token>/getUpdates
+  # If you don't know the chat id, it'll retrieve automatically if you already sent a message to the bot
+  # It's not possible to retrieve chat id, if telegram token is null
+  telegram_chatid: Null
+
+# [en]
+# ---- Configurations related to the game ----
+game_options:
+  # [en]
+  # ---- Send ships to work ----
+  # Default value: full
+  # Available options:
+  # all   = Select all ships (regardless of the rarity and ammo)
+  # full   = Select all ships (regardless of the rarity but 100% ammo)  
+  work_ships_options: "full"
+
+  # [en]
+  # ---- Time to send ships to work ----
+  # Default value: 30 (minute)
+  # Available options:
+  # Any value starting from 10
+  # Remember to set a different time from the option [refresh_ships_time]
+  work_ships_time: 30
+
+  # [en]
+  # ---- Refresh ships position time ----
+  # Default value: 14 (minutes)
+  # Available options:
+  # Any value starting from 5
+  # Remember to set a different time from the option [work_ships_time]
+  refresh_ships_time: 14
+
+  # [en]
+  # ---- Take chest screenshot ----
+  # Default value: 60 (minutes)
+  # Available options:
+  # Any value starting from 30
+  chest_screenshot_time: 60
+
+  # [en]
+  # ---- Click counts ----
+  # Default value: 15
+  # Available options:
+  # Any value starting from 1
+  clicks_count: 15
+
+  # [en]
+  # ---- Drag mouse counts ----
+  # Default value: 22
+  # Available options:
+  # Any value starting from 1
+  drag_count: 22
