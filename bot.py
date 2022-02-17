@@ -166,6 +166,9 @@ async def first_start(app_name=''):
     # Check some routines before refresh the page
 
     # Check if confirm button is available
+    await asyncio.create_task(skip_error_on_game(app_name=app_name))    
+
+    # Check if confirm button is available
     await asyncio.create_task(confirm_button(app_name=app_name))
 
     # Check if is it possible to send heroes to work available at screen
@@ -204,6 +207,8 @@ async def play_game(app_name=''):
         logger = setup_logger(telegram_integration=True, bot_name=app_name)
         logger.info('Play game button clicked..')
         await asyncio.sleep(np.random.uniform(8,10))
+        # Check if is it possible to send heroes to work available at screen
+        await asyncio.create_task(how_many_coins(app_name=app_name))        
         # Check if treasure hunt mode is already available at screen
         await asyncio.create_task(send_ships_to_fight(app_name=app_name))
         return
@@ -348,7 +353,7 @@ async def send_ships_to_fight(app_name=''):
         if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
             # Choose ships first
             while True:
-                buttons = list(pyautogui.locateAllOnScreen(FightImgBtn, confidence=0.99))
+                buttons = list(pyautogui.locateAllOnScreen(FightImgBtn, grayscale=True, confidence=0.99))
                 if pyautogui.locateOnScreen(FullShipsImg, grayscale=True, confidence=0.95) != None:
                     break
                 elif clicks_count > clicks:
