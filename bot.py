@@ -457,7 +457,6 @@ async def go_to_ships(app_name=''):
     '''
 
     ShipsImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'ships-btn.png')
-    BuyBtnImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'buy-btn.png')
     logger = setup_logger(telegram_integration=True,bot_name=app_name)
     if pyautogui.locateOnScreen(ShipsImg, grayscale=True, confidence=0.8) != None:
         # Move mouse in a random place first
@@ -468,10 +467,7 @@ async def go_to_ships(app_name=''):
         pyautogui.click()
         await asyncio.sleep(np.random.uniform(0.5,1.5))
         logger.info('Going to ships menu..')
-        await asyncio.sleep(np.random.uniform(2.5,3.5))        
-        if pyautogui.locateOnScreen(BuyBtnImg, grayscale=True, confidence=0.8) != None:
-            logger.error('Account without ships, you need to buy a ship first, before running this bot! Exiting bot..')
-            exit()
+        await asyncio.sleep(np.random.uniform(2.5,3.5))
         return
 
 async def close_button(app_name=''):
