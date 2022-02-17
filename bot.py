@@ -203,7 +203,7 @@ async def play_game(app_name=''):
         pyautogui.click()
         logger = setup_logger(telegram_integration=True, bot_name=app_name)
         logger.info('Play game button clicked..')
-        await asyncio.sleep(np.random.uniform(4,6))
+        await asyncio.sleep(np.random.uniform(8,10))
         # Check if treasure hunt mode is already available at screen
         await asyncio.create_task(send_ships_to_fight(app_name=app_name))
         return
