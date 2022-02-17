@@ -152,7 +152,7 @@ game_options:
   # ---- Click counts ----
   # Default value: 15
   # Available options:
-  # Any value starting from 1
+  # Any value starting from 1 until 15
   clicks_count: 15
 
   # [en]
