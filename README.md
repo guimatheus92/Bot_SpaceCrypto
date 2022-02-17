@@ -52,6 +52,10 @@ The tutorial on how to use Brave browser for this bot can be found on [GitHub Wi
 
 ## Changelog
 
+- **17/02/2022**:
+    - Improved the function to send pictures to Telegram
+    - Improved the way it was looking for errors on game
+    - Improved function to find the button `confirm`
 - **16/02/2022**: Released bot first version
 
 ## Requirements

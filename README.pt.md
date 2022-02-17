@@ -52,6 +52,10 @@ O tutorial para usar o Brave para este bot pode ser encontrado aqui [GitHub Wiki
 
 ## Atualizações
 
+- **17/02/2022**:
+    - Melhorada a função de enviar fotos para o Telegram
+    - Melhorou a maneira de procurar erros no jogo
+    - Melhorada a função para encontrar o botão `confirm`
 - **16/02/2022**: Lançado a primeira versão
 
 ## Requisitos
