@@ -115,7 +115,7 @@ Escala do monitor: `100%`
 - Envia mensages para o bot do seu Telegram
 - Funciona com a quantidade de contas que você precisar
 
-## YAML file configurations and options explained
+## Configurações e opções do arquivo YAML
 
 **1. bot_options**
 - **create_logfiles**: Você pode habilitar a criação de arquivos de log disponíveis na pasta `logs`
