@@ -139,12 +139,12 @@ Escala do monitor: `100%`
 - **refresh_heroes_time**: Você pode definir a hora em que o bot apenas atualizará o jogo voltando ao menu principal e indo para o jogo Caça ao Tesouro.
 - **refresh_heroes_only**: Você pode habilitar apenas a atualização do jogo voltando ao menu principal e indo para o jogo Caça ao Tesouro, com esta opção o bot *não* enviará heróis para trabalhar ou fazer outras funcionalidades.
 - **chest_screenshot_time**: Você pode definir a hora em que o bot fará uma captura de tela de suas moedas do jogo.
-- **clicks_count**: Você pode definir quantos navios você tem, para que o bot não continue clicando mais do que o necessário.
-- **drag_count**: Você pode definir quantas vezes deseja que o bot arraste a lista procurando por navios que tenham munição.
+- **clicks_count**: Você pode definir quantos naves você tem, para que o bot não continue clicando mais do que o necessário.
+- **drag_count**: Você pode definir quantas vezes deseja que o bot arraste a lista procurando por naves que tenham munição.
 
 ## Melhorias
 
-- [ ] Mais opções no envio de navios para lutar
+- [ ] Mais opções no envio de naves para lutar
 - [ ] Classificar as naves definidos automaticamente pelo usuário
 
 ## Conclusão
