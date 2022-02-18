@@ -144,7 +144,7 @@ async def main():
                 if trigger.set_work != False:
                     if app[1] not in bot_executions_work:
                         bot_executions_work.append(app[1])
-                        await asyncio.create_task(send_ships_to_fight(app_name=app[1]))
+                        await asyncio.create_task(send_ships_to_fight(app_name=app[1], refresh=True))
                 if trigger.set_reload != False:
                     if app[1] not in bot_executions_reload:
                         bot_executions_reload.append(app[1])

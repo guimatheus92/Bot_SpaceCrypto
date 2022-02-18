@@ -62,6 +62,11 @@ O tutorial para usar o Brave para este bot pode ser encontrado aqui [GitHub Wiki
 
 ## Atualizações
 
+- **18/02/2022**:    
+    - Adicionado verificação do parâmetro `work_ships_options`
+    - Melhorada a função de chamar as naves para batalhar
+    - Alterado a imagem quando aparece erro no jogo
+    - Alterado o jeito que ele faz o scroll das naves quando o jogo está com o modo "full" no parâmetro `work_ships_options`
 - **17/02/2022**:
     - Melhorada a função de enviar fotos para o Telegram
     - Melhorou a maneira de procurar erros no jogo

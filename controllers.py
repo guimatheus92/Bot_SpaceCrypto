@@ -124,12 +124,12 @@ def send_telegram_msg(message, bot_name=''):
             chat_id = get_telegram_chat_id()
         else:
             chat_id = telegram_chatid
-        
-        TelegramBot = start_telegram()
+                
         if bot_name != '':
+            TelegramBot = start_telegram()
             TelegramBot.send_message(text='Bot (' + str(bot_name) + '): ' + message, chat_id=chat_id)
         else:
-            TelegramBot.send_message(text=message, chat_id=chat_id)
+            pass
 
 # Function to send Telegram pictures
 def send_telegram_pic(image):
@@ -141,9 +141,9 @@ def send_telegram_pic(image):
             chat_id = get_telegram_chat_id()
         else:
             chat_id = telegram_chatid
-        
-        TelegramBot = start_telegram()
+                
         try:
+            TelegramBot = start_telegram()
             TelegramBot.send_photo(chat_id=chat_id, photo=open(image, 'rb'))
         except:
             pass
@@ -239,7 +239,7 @@ def setup_logger(telegram_integration=False, bot_name=''):
                     # send_telegram_msg(message, record.levelno)    # Passing level
                     # send_telegram_msg(message, record.levelname)  # Passing level name
                 except:
-                    send_telegram_msg('Error on message!', bot_name)
+                    pass
 
     logger = logging.getLogger('logs')
     if logger.hasHandlers():

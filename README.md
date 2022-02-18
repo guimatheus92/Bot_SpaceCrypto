@@ -62,6 +62,11 @@ The tutorial on how to use Brave browser for this bot can be found on [GitHub Wi
 
 ## Changelog
 
+- **18/02/2022**:
+    - Added verification of `work_ships_options` parameter
+    - Improved the function to call ships to fight    
+    - Changed image from error in the game
+    - Changed the way it scrolls the ships when the game is in "full" mode in the `work_ships_options` parameter
 - **17/02/2022**:
     - Improved the function to send pictures to Telegram
     - Improved the way it was looking for errors on game
