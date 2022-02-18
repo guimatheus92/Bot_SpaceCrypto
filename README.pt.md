@@ -17,6 +17,16 @@ Se você achou que esse bot foi uma ajuda para você, por favor faça uma doaç�
 - **PayPal:** https://www.paypal.com/donate/?hosted_button_id=82CABN6CYVG6U
 - **Pix:** 42a762ed-e6ec-4059-a88e-f168b9fbc63f (chave aleatória)
 
+## Observações
+
+- Verifique o tópico de [Requisitos](https://github.com/guimatheus92/Bot_SpaceCrypto/blob/main/README.pt.md#requisitos "Requisitos") para ter certeza em qual ambiente e versões nós sabemos que funciona.
+- Sugiro que você desative o recurso 'Notícias e interesses' do Windows, pois o mouse pode passar por ele e clicar em algum cartão sem que saibamos. Você pode desativar esse recurso em [Ativar e desativar o recurso de notícias e interesses](https://support.microsoft.com/pt-br/windows/mantenha-se-atualizado-com-as-not%C3%ADcias-e-interesses-a39baa08-7488-4169-9ed8-577238f46f8f).
+
+### Seu bot está em loop infinito e não está fazendo nada? Então leia a resposta abaixo!
+
+> ### O problema agora é que não está combinando as mesmas imagens que eu compartilhei com as que estão aparecendo na sua tela. Portanto, você precisará alterá-las para que funcione. Portanto, você precisará substituir as mesmas imagens pelos mesmos nomes no caminho `/static/img/game`.
+> ### Todas as images foram tiradas do jogo de uma tela Full HD e a escala selecionada em 100%. Caso seu bot não esteja funcionando, certifique-se que a escala do seu monitor também esteja em 100%. Após isso, salve todas as imagens novamente e salve elas com o formato `.png`.
+
 ## Principais etapas
 
 De uma forma resumida vai precisar fazer:
@@ -96,12 +106,6 @@ Este projeto utiliza os seguintes requisitos:
     tzlocal==4.1
 
 Escala do monitor: `100%`
-
-## Observações
-
-- Verifique o tópico de [Requisitos](https://github.com/guimatheus92/Bot_SpaceCrypto/blob/main/README.pt.md#requisitos "Requisitos") para ter certeza em qual ambiente e versões nós sabemos que funciona.
-- Sugiro que você desative o recurso 'Notícias e interesses' do Windows, pois o mouse pode passar por ele e clicar em algum cartão sem que saibamos. Você pode desativar esse recurso em [Ativar e desativar o recurso de notícias e interesses](https://support.microsoft.com/pt-br/windows/mantenha-se-atualizado-com-as-not%C3%ADcias-e-interesses-a39baa08-7488-4169-9ed8-577238f46f8f).
-- Todas as images foram tiradas do jogo de uma tela Full HD e a escala selecionada em 100%. Caso seu bot não esteja funcionando, certifique-se que a escala do seu monitor também esteja em 100%. Após isso, salve todas as imagens novamente e salve elas com o formato `.png`.
 
 ## Funcionalidades
 
