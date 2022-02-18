@@ -82,7 +82,7 @@ Windows version:
 - `Windows 10`
 - `Windows 11`
 
-Python version:
+Python version (**Python 4+ versions DOES NOT work!**):
 ```python
 Python 3.9.9
 ```
