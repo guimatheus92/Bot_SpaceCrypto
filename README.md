@@ -17,6 +17,16 @@ If you find this bot helpful to you, please donate so we can continue to improve
 - **PayPal:** https://www.paypal.com/donate/?hosted_button_id=82CABN6CYVG6U
 - **Pix:** 42a762ed-e6ec-4059-a88e-f168b9fbc63f (chave aleatória)
 
+## Observations
+
+- Check [Requirements](https://github.com/guimatheus92/Bot_SpaceCrypto#requirements "Requirements") topic to make sure in what environment, tools and versions we know that it works.
+- I suggest you to turn off the feature `News and interests` from Windows, because the mouse might pass through it and click in some card without us know. You can turn off this feature from [Turn news and interests feature on and off](https://support.microsoft.com/en-us/windows/stay-up-to-date-with-news-and-interests-a39baa08-7488-4169-9ed8-577238f46f8f) guide.
+
+### Does your bot is in endless loop and it's doing nothing? So read the note below!
+
+> ### The problem now, is that it's not matching the same images I shared from the one you have on your screen. So you'll need to change those in order to make it work. So you'll need to replace the same images with the exactly same names in the path `/static/img/game`. 
+> ### All images taken from the game was from a Full HD screen and scale at 100%. So if your bot is not working, make sure that your scale is at least 100%. After that, get all pictures again and save them as `.png` format.
+
 ## Main Steps
 
 In a breafy way you'll need to:
@@ -96,12 +106,6 @@ This project utilizes the following requirements:
     tzlocal==4.1
 
 Monitor scale: `100%`
-
-## Observations
-
-- Check [Requirements](https://github.com/guimatheus92/Bot_SpaceCrypto#requirements "Requirements") topic to make sure in what environment, tools and versions we know that it works.
-- I suggest you to turn off the feature `News and interests` from Windows, because the mouse might pass through it and click in some card without us know. You can turn off this feature from [Turn news and interests feature on and off](https://support.microsoft.com/en-us/windows/stay-up-to-date-with-news-and-interests-a39baa08-7488-4169-9ed8-577238f46f8f) guide.
-- All images taken from the game was from a Full HD screen and scale at 100%. So if your bot is not working, make sure that your scale is at least 100%. After that, get all pictures again and save them as `.png` format.
 
 ## Features
 
