@@ -168,9 +168,6 @@ async def first_start(app_name=''):
     # Check if confirm button is available
     await asyncio.create_task(skip_error_on_game(app_name=app_name))    
 
-    # Check if confirm button is available
-    await asyncio.create_task(confirm_button(app_name=app_name))
-
     # Check if is it possible to send heroes to work available at screen
     await asyncio.create_task(how_many_coins(app_name=app_name))
 
@@ -178,7 +175,7 @@ async def first_start(app_name=''):
     await asyncio.create_task(continue_fighting(app_name=app_name))
 
     # Check if needs to send ships to fight
-    await asyncio.create_task(send_ships_to_fight(app_name=app_name))
+    await asyncio.create_task(send_ships_to_fight(app_name=app_name, refresh=False))
 
     # Refresh page if game is not already logged
     GameImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'game-screen.png')
@@ -210,7 +207,7 @@ async def play_game(app_name=''):
         # Check if is it possible to send heroes to work available at screen
         await asyncio.create_task(how_many_coins(app_name=app_name))        
         # Check if treasure hunt mode is already available at screen
-        await asyncio.create_task(send_ships_to_fight(app_name=app_name))
+        await asyncio.create_task(send_ships_to_fight(app_name=app_name, refresh=False))
         return
 
 async def start_game(app_name=''):
@@ -300,13 +297,13 @@ async def send_ships_to_fight(app_name='', refresh=False):
         logger.error('You did not set the right parameter in the config.yaml file, make sure to set the correct one! Exiting bot..')
         exit()
 
+    # Call function
+    await asyncio.create_task(remove_ships_from_fight(app_name=app_name))
+
     if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
         if refresh != False:
             # Call function
             await asyncio.create_task(refresh_game(app_name=app_name))
-
-        # Call function
-        await asyncio.create_task(remove_ships_from_fight(app_name=app_name))
 
         if work_ships_options == 'full':
             clicks_count = 0
@@ -408,7 +405,7 @@ async def continue_fighting(app_name=''):
 
     if pyautogui.locateOnScreen(ZeroAmmoImgBtn, grayscale=True, confidence=0.8) != None:
         # Send ships to fight again
-        await asyncio.create_task(send_ships_to_fight(app_name=app_name))        
+        await asyncio.create_task(send_ships_to_fight(app_name=app_name, refresh=False))        
 
 async def refresh_game(app_name=''):
     '''
