@@ -62,7 +62,7 @@ The tutorial on how to use Brave browser for this bot can be found on [GitHub Wi
 
 ## Changelog
 
-- **18/02/2022**:
+- **19/02/2022**:
     - Added verification of `work_ships_options` parameter
     - Improved the function to call ships to fight    
     - Changed image from error in the game
