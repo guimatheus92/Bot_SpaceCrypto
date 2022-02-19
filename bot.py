@@ -557,15 +557,12 @@ async def how_many_coins(app_name=''):
     SurrenderBtnImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'surreder-btn.png')
     logger = setup_logger(telegram_integration=True,bot_name=app_name)
     if pyautogui.locateOnScreen(SurrenderBtnImg, grayscale=True, confidence=0.8) != None:
-        await asyncio.create_task(go_to_ships(app_name=app_name))
-        await asyncio.sleep(np.random.uniform(1.8,2.8))
         # Take screenshot
         path_file = take_screenshot('screenshot', 'report', 'coins')        
         if telegram_integration != False:
             # Send picture to Telegram
             send_telegram_pic(path_file)
         logger.info('Screenshot took from coins, you can check how many coins you have!')
-        await asyncio.create_task(fight_boss(app_name=app_name))
         return
     elif pyautogui.locateOnScreen(ClaimBtnImg, grayscale=True, confidence=0.8) != None:
         await asyncio.sleep(np.random.uniform(1.8,2.8))
