@@ -168,9 +168,6 @@ async def first_start(app_name=''):
     # Check if confirm button is available
     await asyncio.create_task(skip_error_on_game(app_name=app_name))    
 
-    # Check if confirm button is available
-    await asyncio.create_task(confirm_button(app_name=app_name))
-
     # Check if is it possible to send heroes to work available at screen
     await asyncio.create_task(how_many_coins(app_name=app_name))
 
@@ -178,7 +175,7 @@ async def first_start(app_name=''):
     await asyncio.create_task(continue_fighting(app_name=app_name))
 
     # Check if needs to send ships to fight
-    await asyncio.create_task(send_ships_to_fight(app_name=app_name))
+    await asyncio.create_task(send_ships_to_fight(app_name=app_name, refresh=False))
 
     # Refresh page if game is not already logged
     GameImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'game-screen.png')
@@ -210,7 +207,7 @@ async def play_game(app_name=''):
         # Check if is it possible to send heroes to work available at screen
         await asyncio.create_task(how_many_coins(app_name=app_name))        
         # Check if treasure hunt mode is already available at screen
-        await asyncio.create_task(send_ships_to_fight(app_name=app_name))
+        await asyncio.create_task(send_ships_to_fight(app_name=app_name, refresh=False))
         return
 
 async def start_game(app_name=''):
@@ -286,7 +283,7 @@ async def remove_ships_from_fight(app_name=''):
     if remove_flag != False:
         logger.info('Ships were removed from fight!')
 
-async def send_ships_to_fight(app_name=''):    
+async def send_ships_to_fight(app_name='', refresh=False):    
 
     logger = setup_logger(telegram_integration=False, bot_name=app_name)
     logger.info('[Work] Calling send ships to fight function..')
@@ -296,100 +293,106 @@ async def send_ships_to_fight(app_name=''):
     FightBossImgBtn = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'fightboss-btn.png')
     FullShipsImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'fullships.png')
 
-    # Check if button is already available at screen
-    await asyncio.create_task(confirm_button(app_name=app_name))
+    if work_ships_options not in ('full', 'all'):
+        logger.error('You did not set the right parameter in the config.yaml file, make sure to set the correct one! Exiting bot..')
+        exit()
 
     # Call function
     await asyncio.create_task(remove_ships_from_fight(app_name=app_name))
 
-    if work_ships_options == 'full':
-        clicks_count = 0
-        drag_count = 0
-        # Send them to fight by click on the button 'Fight Boss'
-        if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
-            # Choose ships first
-            while True:
-                buttons = list(pyautogui.locateAllOnScreen(FightFullImgBtn, confidence=0.99))
-                if pyautogui.locateOnScreen(FullShipsImg, grayscale=True, confidence=0.95) != None:
-                    break
-                elif clicks_count > clicks:
-                    break
-                elif drag_count > drag:
-                    break
-                
-                if len(buttons) > 0:
-                    for position in buttons:
-                        if pyautogui.locateOnScreen(FightFullImgBtn, grayscale=True, confidence=0.8) != None:
-                            pyautogui.moveTo(position, None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
-                            pyautogui.click()
-                            clicks_count += 1
-                else:
-                    if pyautogui.locateOnScreen(FightFullImgBtn, grayscale=True, confidence=0.8) != None:
-                        pyautogui.moveTo(pyautogui.locateOnScreen(FightFullImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
-                        pyautogui.dragRel(0, -200, duration=1, button='left')
-                        #pyautogui.scroll(-60)
-                        await asyncio.sleep(np.random.uniform(3.8,4))
-                        drag_count += 1
-            
-            if clicks_count > 0:
-                logger.info('Ships were sending to fight!')
-                
-            # Check if fight boss button is already available at screen
-            await asyncio.create_task(fight_boss(app_name=app_name))
+    if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
+        if refresh != False:
+            # Call function
+            await asyncio.create_task(refresh_game(app_name=app_name))
 
-            # Check if play game button is already available at screen
-            await asyncio.create_task(confirm_button(app_name=app_name))
-
-            await asyncio.sleep(np.random.uniform(1.8,2.8))
-            # Take screenshot
-            path_file = take_screenshot('screenshot', 'report', 'fight_boss')
-            if telegram_integration != False:
-                # Send picture to Telegram
-                send_telegram_pic(path_file)
-    elif work_ships_options == 'all':
-        clicks_count = 0
-        drag_count = 0
-        # Send them to fight by click on the button 'Fight Boss'
-        if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
-            # Choose ships first
-            while True:
-                buttons = list(pyautogui.locateAllOnScreen(FightImgBtn, confidence=0.99))
-                if pyautogui.locateOnScreen(FullShipsImg, grayscale=True, confidence=0.95) != None:
-                    break
-                elif clicks_count > clicks:
-                    break
-                elif drag_count > drag:
-                    break
-
-                if len(buttons) > 0:
-                    for position in buttons:
+        if work_ships_options == 'full':
+            clicks_count = 0
+            drag_count = 0
+            # Send them to fight by click on the button 'Fight Boss'
+            if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
+                # Choose ships first
+                while True:
+                    buttons = list(pyautogui.locateAllOnScreen(FightFullImgBtn, confidence=0.99))
+                    if pyautogui.locateOnScreen(FullShipsImg, grayscale=True, confidence=0.95) != None:
+                        break
+                    elif clicks_count > clicks:
+                        break
+                    elif drag_count > drag:
+                        break
+                    
+                    if len(buttons) > 0:
+                        for position in buttons:
+                            if pyautogui.locateOnScreen(FightFullImgBtn, grayscale=True, confidence=0.8) != None:
+                                pyautogui.moveTo(position, None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
+                                pyautogui.click()
+                                clicks_count += 1
+                    else:
                         if pyautogui.locateOnScreen(FightImgBtn, grayscale=True, confidence=0.8) != None:
-                            pyautogui.moveTo(position, None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
-                            pyautogui.click()
-                            clicks_count += 1
-                else:
-                    if pyautogui.locateOnScreen(FightImgBtn, grayscale=True, confidence=0.8) != None:
-                        pyautogui.moveTo(pyautogui.locateOnScreen(FightImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
-                        pyautogui.dragRel(0, -200, duration=1, button='left')
-                        #pyautogui.scroll(-60)
-                        await asyncio.sleep(np.random.uniform(3.8,4))
-                        drag_count += 1
-            
-            if clicks_count > 0:
-                logger.info('Ships were sending to fight!')
+                            pyautogui.moveTo(pyautogui.locateOnScreen(FightImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
+                            pyautogui.dragRel(0, -200, duration=1, button='left')
+                            #pyautogui.scroll(-60)
+                            await asyncio.sleep(np.random.uniform(3.8,4))
+                            drag_count += 1
                 
-            # Check if fight boss button is already available at screen
-            await asyncio.create_task(fight_boss(app_name=app_name))
+                if clicks_count > 0:
+                    logger.info('Ships were sending to fight!')
+                    
+                # Check if fight boss button is already available at screen
+                await asyncio.create_task(fight_boss(app_name=app_name))
 
-            # Check if play game button is already available at screen
-            await asyncio.create_task(confirm_button(app_name=app_name))
+                # Check if play game button is already available at screen
+                await asyncio.create_task(confirm_button(app_name=app_name))
 
-            await asyncio.sleep(np.random.uniform(1.8,2.8))
-            # Take screenshot
-            path_file = take_screenshot('screenshot', 'report', 'fight_boss')
-            if telegram_integration != False:
-                # Send picture to Telegram
-                send_telegram_pic(path_file)                   
+                await asyncio.sleep(np.random.uniform(1.8,2.8))
+                # Take screenshot
+                path_file = take_screenshot('screenshot', 'report', 'fight_boss')
+                if telegram_integration != False:
+                    # Send picture to Telegram
+                    send_telegram_pic(path_file)
+        elif work_ships_options == 'all':
+            clicks_count = 0
+            drag_count = 0
+            # Send them to fight by click on the button 'Fight Boss'
+            if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
+                # Choose ships first
+                while True:
+                    buttons = list(pyautogui.locateAllOnScreen(FightImgBtn, confidence=0.99))
+                    if pyautogui.locateOnScreen(FullShipsImg, grayscale=True, confidence=0.95) != None:
+                        break
+                    elif clicks_count > clicks:
+                        break
+                    elif drag_count > drag:
+                        break
+
+                    if len(buttons) > 0:
+                        for position in buttons:
+                            if pyautogui.locateOnScreen(FightImgBtn, grayscale=True, confidence=0.8) != None:
+                                pyautogui.moveTo(position, None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
+                                pyautogui.click()
+                                clicks_count += 1
+                    else:
+                        if pyautogui.locateOnScreen(FightImgBtn, grayscale=True, confidence=0.8) != None:
+                            pyautogui.moveTo(pyautogui.locateOnScreen(FightImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
+                            pyautogui.dragRel(0, -200, duration=1, button='left')
+                            #pyautogui.scroll(-60)
+                            await asyncio.sleep(np.random.uniform(3.8,4))
+                            drag_count += 1
+                
+                if clicks_count > 0:
+                    logger.info('Ships were sending to fight!')
+                    
+                # Check if fight boss button is already available at screen
+                await asyncio.create_task(fight_boss(app_name=app_name))
+
+                # Check if play game button is already available at screen
+                await asyncio.create_task(confirm_button(app_name=app_name))
+
+                await asyncio.sleep(np.random.uniform(1.8,2.8))
+                # Take screenshot
+                path_file = take_screenshot('screenshot', 'report', 'fight_boss')
+                if telegram_integration != False:
+                    # Send picture to Telegram
+                    send_telegram_pic(path_file)                   
 
 async def continue_fighting(app_name=''):
     '''
@@ -402,7 +405,7 @@ async def continue_fighting(app_name=''):
 
     if pyautogui.locateOnScreen(ZeroAmmoImgBtn, grayscale=True, confidence=0.8) != None:
         # Send ships to fight again
-        await asyncio.create_task(send_ships_to_fight(app_name=app_name))        
+        await asyncio.create_task(send_ships_to_fight(app_name=app_name, refresh=False))        
 
 async def refresh_game(app_name=''):
     '''
@@ -413,7 +416,7 @@ async def refresh_game(app_name=''):
     logger.info('[Refresh] Calling refresh heroes position function..')
     FightBossImgBtn = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'fightboss-btn.png')    
 
-    if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:        
+    if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
         # Go to base menu
         await asyncio.create_task(go_to_base(app_name=app_name))
         # Go to spaceship menu
@@ -454,7 +457,7 @@ async def go_to_base(app_name=''):
         # Click on Treasure Hunt game mode
         pyautogui.click()
         logger.info('Going to base menu..')
-        await asyncio.sleep(np.random.uniform(0.8,1.5))
+        await asyncio.sleep(np.random.uniform(3,4))
         return
 
 async def go_to_ships(app_name=''):
@@ -472,9 +475,8 @@ async def go_to_ships(app_name=''):
         pyautogui.moveTo(pyautogui.locateOnScreen(ShipsImg, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
         # Click on Treasure Hunt game mode
         pyautogui.click()
-        await asyncio.sleep(np.random.uniform(0.5,1.5))
         logger.info('Going to ships menu..')
-        await asyncio.sleep(np.random.uniform(2.5,3.5))
+        await asyncio.sleep(np.random.uniform(3,4))
         return
 
 async def close_button(app_name=''):
@@ -552,15 +554,12 @@ async def how_many_coins(app_name=''):
     SurrenderBtnImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'surreder-btn.png')
     logger = setup_logger(telegram_integration=True,bot_name=app_name)
     if pyautogui.locateOnScreen(SurrenderBtnImg, grayscale=True, confidence=0.8) != None:
-        await asyncio.create_task(go_to_ships(app_name=app_name))
-        await asyncio.sleep(np.random.uniform(1.8,2.8))
         # Take screenshot
         path_file = take_screenshot('screenshot', 'report', 'coins')        
         if telegram_integration != False:
             # Send picture to Telegram
             send_telegram_pic(path_file)
         logger.info('Screenshot took from coins, you can check how many coins you have!')
-        await asyncio.create_task(fight_boss(app_name=app_name))
         return
     elif pyautogui.locateOnScreen(ClaimBtnImg, grayscale=True, confidence=0.8) != None:
         await asyncio.sleep(np.random.uniform(1.8,2.8))
