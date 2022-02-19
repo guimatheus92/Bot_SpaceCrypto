@@ -232,7 +232,7 @@ async def fight_boss(app_name=''):
         move_mouse_random()
         # Move to location
         pyautogui.moveTo(pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
-        # Click on Treasure Hunt game mode
+        # Click on 
         pyautogui.click()
         logger.info('Fight boss game mode clicked..')
         await asyncio.sleep(np.random.uniform(0.8,1.5))
@@ -248,7 +248,7 @@ async def confirm_button(app_name=''):
         if pyautogui.locateOnScreen(ConfirmImgBtn, grayscale=True, confidence=0.8) != None:
             # Move to location
             pyautogui.moveTo(pyautogui.locateOnScreen(ConfirmImgBtn, grayscale=True, confidence=0.8), None, np.random.uniform(0.2,0.4), pyautogui.easeInOutQuad)
-            # Click on Treasure Hunt game mode
+            # Click on 
             pyautogui.click()
             logger.info('Confirm buttom clicked..')
             await asyncio.sleep(np.random.uniform(0.3,0.6))
@@ -292,13 +292,15 @@ async def send_ships_to_fight(app_name='', refresh=False):
     FightImgBtn = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'fight-btn.png')
     FightBossImgBtn = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'fightboss-btn.png')
     FullShipsImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'fullships.png')
+    ZeroAmmoImgBtn = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'zero-ships.png')    
 
     if work_ships_options not in ('full', 'all'):
         logger.error('You did not set the right parameter in the config.yaml file, make sure to set the correct one! Exiting bot..')
-        exit()
+        exit()    
 
-    # Call function
-    await asyncio.create_task(remove_ships_from_fight(app_name=app_name))
+    if pyautogui.locateOnScreen(ZeroAmmoImgBtn, grayscale=True, confidence=0.8) != None:
+        # Call function
+        await asyncio.create_task(remove_ships_from_fight(app_name=app_name))
 
     if pyautogui.locateOnScreen(FightBossImgBtn, grayscale=True, confidence=0.8) != None:
         if refresh != False:
@@ -454,7 +456,7 @@ async def go_to_base(app_name=''):
         move_mouse_random()
         # Move to location               
         pyautogui.moveTo(pyautogui.locateOnScreen(BaseBtnImg, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
-        # Click on Treasure Hunt game mode
+        # Click on 
         pyautogui.click()
         logger.info('Going to base menu..')
         await asyncio.sleep(np.random.uniform(3,4))
@@ -473,7 +475,7 @@ async def go_to_ships(app_name=''):
         move_mouse_random()
         # Move to location               
         pyautogui.moveTo(pyautogui.locateOnScreen(ShipsImg, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
-        # Click on Treasure Hunt game mode
+        # Click on 
         pyautogui.click()
         logger.info('Going to ships menu..')
         await asyncio.sleep(np.random.uniform(3,4))
