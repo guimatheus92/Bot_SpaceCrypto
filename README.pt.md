@@ -88,7 +88,7 @@ Versão do Windows:
 
 - `Windows 11`
 
-Versão do Python (**Versões do Python 4+ NÃO funciona!**):
+Versão do Python (**Versões do Python 3.10+ NÃO funciona!**):
 ```python
 Python 3.9.9
 ```
