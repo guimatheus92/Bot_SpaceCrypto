@@ -21,6 +21,7 @@ If you find this bot helpful to you, please donate so we can continue to improve
 
 - Check [Requirements](https://github.com/guimatheus92/Bot_SpaceCrypto#requirements "Requirements") topic to make sure in what environment, tools and versions we know that it works.
 - I suggest you to turn off the feature `News and interests` from Windows, because the mouse might pass through it and click in some card without us know. You can turn off this feature from [Turn news and interests feature on and off](https://support.microsoft.com/en-us/windows/stay-up-to-date-with-news-and-interests-a39baa08-7488-4169-9ed8-577238f46f8f) guide.
+- Change the sort option in the game to "Max Ammo", that will keep the bot faster by looking into new ships even with pagination.
 
 ### Does your bot is in endless loop and it's doing nothing? So read the note below!
 
