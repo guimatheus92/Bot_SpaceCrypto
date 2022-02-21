@@ -21,6 +21,7 @@ Se você achou que esse bot foi uma ajuda para você, por favor faça uma doaç�
 
 - Verifique o tópico de [Requisitos](https://github.com/guimatheus92/Bot_SpaceCrypto/blob/main/README.pt.md#requisitos "Requisitos") para ter certeza em qual ambiente e versões nós sabemos que funciona.
 - Sugiro que você desative o recurso 'Notícias e interesses' do Windows, pois o mouse pode passar por ele e clicar em algum cartão sem que saibamos. Você pode desativar esse recurso em [Ativar e desativar o recurso de notícias e interesses](https://support.microsoft.com/pt-br/windows/mantenha-se-atualizado-com-as-not%C3%ADcias-e-interesses-a39baa08-7488-4169-9ed8-577238f46f8f).
+- Altere a opção de classificação no jogo para "Max Ammo", que manterá o bot mais rápido procurando novas naves mesmo com paginação.
 
 ### Seu bot está em loop infinito e não está fazendo nada? Então leia a resposta abaixo!
 
