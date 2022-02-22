@@ -63,6 +63,10 @@ The tutorial on how to use Brave browser for this bot can be found on [GitHub Wi
 
 ## Changelog
 
+- **22/02/2022**:
+    - Added `create_bat_file`, `telegram_pic_integration`, `drag_amount`, `surrender_on_boss` parameters
+    - Added function to surrender on boss, when boss image is the same as boss available
+    - Improved function to send pictures to Telegram
 - **19/02/2022**:
     - Added verification of `work_ships_options` parameter
     - Improved the function to call ships to fight    

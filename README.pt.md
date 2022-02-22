@@ -63,6 +63,10 @@ O tutorial para usar o Brave para este bot pode ser encontrado aqui [GitHub Wiki
 
 ## Atualizações
 
+- **22/02/2022**:
+    - Adicionado os parâmetros `create_bat_file`, `telegram_pic_integration`, `drag_amount`, `surrender_on_boss`
+    - Adicionado a função de desistir em um determinado chefe de acordo com a imagem salva
+    - Melhorada a função de enviar fotos para o Telegram
 - **19/02/2022**:    
     - Adicionado verificação do parâmetro `work_ships_options`
     - Melhorada a função de chamar as naves para batalhar

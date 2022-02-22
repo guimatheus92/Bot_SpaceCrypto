@@ -1,8 +1,8 @@
 import os
 import asyncio
 import tzlocal
-from bot import reload_page, start_game, login_metamask, new_map, SetTrigger, skip_error_on_game, how_many_coins, first_start, send_ships_to_fight, refresh_game, continue_fighting
-from controllers import get_browser, countdown_timer, setup_logger, initialize_pyautogui, read_configurations, delete_log_files, delete_folders
+from bot import reload_page, start_game, login_metamask, new_map, SetTrigger, skip_error_on_game, how_many_coins, first_start, send_ships_to_fight, refresh_game, continue_fighting, surrender_on_boss
+from controllers import get_browser, countdown_timer, setup_logger, initialize_pyautogui, read_configurations, delete_log_files, delete_folders, create_bat_file
 from pywinauto import Desktop
 from itertools import cycle
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -13,7 +13,8 @@ try:
     work_ships_time = streamConfig['game_options']['work_ships_time']
     refresh_browser_time = streamConfig['bot_options']['refresh_browser_time']
     enable_multiaccount = streamConfig['bot_options']['enable_multiaccount']
-    chest_screenshot_time = streamConfig['game_options']['chest_screenshot_time']    
+    chest_screenshot_time = streamConfig['game_options']['chest_screenshot_time']
+    surrender = streamConfig['game_options']['surrender_on_boss']
 except FileNotFoundError:
     print('Error: config.yaml file not found, make sure config.yaml are placed in the folder..')
     exit()
@@ -59,6 +60,9 @@ async def main():
 
     # Delete old folders
     await asyncio.create_task(delete_folders())
+
+    # Create bat file, so you can faster later
+    await asyncio.create_task(create_bat_file())
 
     # Countdown timer before start the bot
     await asyncio.create_task(countdown_timer())
@@ -133,6 +137,9 @@ async def main():
                 await asyncio.create_task(new_map(app_name=app[1]))
                 # - Continue to play
                 await asyncio.create_task(continue_fighting(app_name=app[1]))
+                # - Surrender o boss
+                if surrender != False:
+                    await asyncio.create_task(surrender_on_boss(app_name=app[1]))
                 # - Check for errors on game
                 await asyncio.create_task(skip_error_on_game(app_name=app[1]))
 

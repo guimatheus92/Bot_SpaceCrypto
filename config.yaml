@@ -73,6 +73,14 @@ bot_options:
   # Remember that refreshing the page takes time, so becarefull with the number you set
   refresh_browser_time: 60
 
+  # [en]
+  # ---- Create bat file automatically ----
+  # Default value: True
+  # Available options:
+  # True =  Create bat file automatically, so you can run faster.
+  # False = Don't create bat file automatically
+  create_bat_file: True  
+
   metamask_options:
     # [en]
     # ---- Enable login in Metamask ----
@@ -99,6 +107,14 @@ telegram_options:
   # True = Use telegram to receive messages according log process
   # False = Don't use telegram to receive messages according log process
   telegram_integration: False
+
+  # [en]
+  # ---- Telegram integration with log files ----
+  # Default value: False
+  # Available options:
+  # True = Use telegram to receive picutres according log process
+  # False = Don't use telegram to receive picutres according log process
+  telegram_pic_integration: False
 
   # [en]
   # ---- Telegram token ----
@@ -160,4 +176,19 @@ game_options:
   # Default value: 22
   # Available options:
   # Any value starting from 1
-  drag_count: 22
+  drag_count: 11
+
+  # [en]
+  # ---- Drag mouse amount ----
+  # Default value: 200
+  # Available options:
+  # Any value starting from 1
+  drag_amount: 200
+
+  # [en]
+  # ---- Surrender on boss number ----
+  # Default value: False
+  # Available options:
+  # True = Bot will surrender on boss number "x" depending on image called surrender-boss.png
+  # False = Bot will not surrender on any boss, will keep going until where it's possible
+  surrender_on_boss: False
