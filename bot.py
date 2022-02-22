@@ -167,6 +167,11 @@ async def first_start(app_name=''):
 
     # Check some routines before refresh the page
 
+    # Refresh page if game is not already logged
+    GameImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'game-screen.png')
+    if pyautogui.locateOnScreen(GameImg, grayscale=True, confidence=0.8) != None:
+        await asyncio.create_task(reload_page(app_name=app_name))
+
     # Check if confirm button is available
     await asyncio.create_task(skip_error_on_game(app_name=app_name))    
 
@@ -178,11 +183,6 @@ async def first_start(app_name=''):
 
     # Check if needs to send ships to fight
     await asyncio.create_task(send_ships_to_fight(app_name=app_name, refresh=True))
-
-    # Refresh page if game is not already logged
-    GameImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'game-screen.png')
-    if pyautogui.locateOnScreen(GameImg, grayscale=True, confidence=0.8) != None:
-        await asyncio.create_task(reload_page(app_name=app_name))
 
     logger.info('Exiting start function..')
 
@@ -243,7 +243,7 @@ async def fight_boss(app_name=''):
 async def confirm_button(app_name=''):
     
     logger = setup_logger(telegram_integration=True, bot_name=app_name)
-    images = ['confirm-btn.png', 'confirm-btn2.png']
+    images = ['confirm-btn.png', 'confirm-btn2.png', 'confirm-btn3.png']
     for image in images:
         ConfirmImgBtn = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', image)
         # Click on 'Confirm' button if applicable because the boss might loss
@@ -296,18 +296,19 @@ async def surrender_on_boss(app_name=''):
     
     if surrender != False:
         if pyautogui.locateOnScreen(BossImg, grayscale=True, confidence=0.90) != None:
+            # Take screenshot
+            path_file = take_screenshot('screenshot', 'report', 'boss_surrended')
+            # Send picture to Telegram
+            send_telegram_pic(path_file)            
             # Move to location
             pyautogui.moveTo(pyautogui.locateOnScreen(SurrenderBtnImg, grayscale=True, confidence=0.8), None, np.random.uniform(0.4,0.9), pyautogui.easeInOutQuad)
             # Click on 
             pyautogui.click()
-            logger.info('Surrended on boss!')
+            logger = setup_logger(telegram_integration=True, bot_name=app_name)
+            logger.info('Boss surrended!')
             # Check if play game button is already available at screen
             await asyncio.create_task(confirm_button(app_name=app_name))            
             await asyncio.sleep(np.random.uniform(3,4))
-            # Take screenshot
-            path_file = take_screenshot('screenshot', 'report', 'fight_boss')
-            # Send picture to Telegram
-            send_telegram_pic(path_file)            
             return
 
 async def send_ships_to_fight(app_name='', refresh=False):    
@@ -454,13 +455,13 @@ async def new_map(app_name=''):
     logger.info('Checking if is there any new map..')   
 
     NewMapImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'victory-screen.png')
+    RewardImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'reward.png')
     if pyautogui.locateOnScreen(NewMapImg, grayscale=True, confidence=0.8) != None:
-        path_file = take_screenshot('screenshot', 'new_map', 'antes')
-        # Send picture to Telegram
-        send_telegram_pic(path_file)
+        if pyautogui.locateOnScreen(RewardImg, grayscale=True, confidence=0.8) != None:
+            path_file = take_screenshot('screenshot', 'new_map', 'antes')
+            # Send picture to Telegram
+            send_telegram_pic(path_file)
         await asyncio.create_task(confirm_button(app_name=app_name))
-        await asyncio.sleep(np.random.uniform(0.8,1.5))
-        take_screenshot('screenshot', 'new_map', 'depois')
         return
 
 async def go_to_base(app_name=''):
