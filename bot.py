@@ -295,7 +295,7 @@ async def surrender_on_boss(app_name=''):
     SurrenderBtnImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'surreder-btn.png')
     
     if surrender != False:
-        if pyautogui.locateOnScreen(BossImg, grayscale=True, confidence=0.90) != None:
+        if pyautogui.locateOnScreen(BossImg, grayscale=True, confidence=0.95) != None:
             # Take screenshot
             path_file = take_screenshot('screenshot', 'report', 'boss_surrended')
             # Send picture to Telegram
@@ -340,6 +340,7 @@ async def send_ships_to_fight(app_name='', refresh=False):
             drag_count = 0
             # Choose ships first
             while True:
+                await asyncio.sleep(np.random.uniform(1,2))
                 buttons = list(pyautogui.locateAllOnScreen(FightFullImgBtn, confidence=0.99))
                 if pyautogui.locateOnScreen(FullShipsImg, grayscale=True, confidence=0.95) != None:
                     break
@@ -381,6 +382,7 @@ async def send_ships_to_fight(app_name='', refresh=False):
             drag_count = 0
             # Choose ships first
             while True:
+                await asyncio.sleep(np.random.uniform(1,2))
                 buttons = list(pyautogui.locateAllOnScreen(FightImgBtn, confidence=0.99))
                 if pyautogui.locateOnScreen(FullShipsImg, grayscale=True, confidence=0.95) != None:
                     break
@@ -454,13 +456,11 @@ async def new_map(app_name=''):
     logger = setup_logger(telegram_integration=False, bot_name=app_name)
     logger.info('Checking if is there any new map..')   
 
-    NewMapImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'victory-screen.png')
     RewardImg = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'static', 'img', 'game', 'reward.png')
-    if pyautogui.locateOnScreen(NewMapImg, grayscale=True, confidence=0.8) != None:
-        if pyautogui.locateOnScreen(RewardImg, grayscale=True, confidence=0.8) != None:
-            path_file = take_screenshot('screenshot', 'new_map', 'antes')
-            # Send picture to Telegram
-            send_telegram_pic(path_file)
+    if pyautogui.locateOnScreen(RewardImg, grayscale=True, confidence=0.8) != None:
+        path_file = take_screenshot('screenshot', 'new_map', 'antes')
+        # Send picture to Telegram
+        send_telegram_pic(path_file)
         await asyncio.create_task(confirm_button(app_name=app_name))
         return
 
