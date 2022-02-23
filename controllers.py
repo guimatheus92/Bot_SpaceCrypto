@@ -25,6 +25,7 @@ def read_configurations():
 try:
     streamConfig = read_configurations()
     telegram_integration = streamConfig['telegram_options']['telegram_integration']
+    telegram_pic_integration = streamConfig['telegram_options']['telegram_pic_integration']    
     telegram_token = streamConfig['telegram_options']['telegram_token']    
     telegram_chatid = streamConfig['telegram_options']['telegram_chatid']        
     create_logfiles = streamConfig['bot_options']['create_logfiles']
@@ -32,6 +33,7 @@ try:
     delete_old_folders = streamConfig['bot_options']['delete_old_folders']
     multiaccount_names = streamConfig['bot_options']['multiaccount_names']
     enable_multiaccount = streamConfig['bot_options']['enable_multiaccount']
+    create_bat = streamConfig['bot_options']['create_bat_file']    
 except FileNotFoundError:
     print('Error: config.yaml file not found, make sure config.yaml are placed in the folder..')
     exit()
@@ -136,7 +138,7 @@ def send_telegram_pic(image):
     '''
     Function to send Telegram pictures
     '''
-    if telegram_integration != False:
+    if telegram_pic_integration != False:
         if telegram_chatid is None:
             chat_id = get_telegram_chat_id()
         else:
@@ -167,18 +169,18 @@ def take_screenshot(folder='', sub_folder='', info = ''):
 
     path = os.path.join(path, time.strftime("%Y-%m-%d"))
     if not os.path.exists(path):
-        os.mkdir(path)            
+        os.mkdir(path)
     if info != '':
         info = f"_{info}"
 
     # File name        
     file = time.strftime(f"%Y-%m-%d-%H-%M-%S{info}.jpg")
-    # Take screenshot
-    myScreenshot = pyautogui.screenshot()
     path_file = os.path.join(path, file)
-    # Save screenshot
-    myScreenshot.save(path_file)
-
+    try:
+        # Save screenshot
+        pyautogui.screenshot(path_file)
+    except:
+        pass
     return path_file
 
 async def initialize_pyautogui():
@@ -304,6 +306,19 @@ def get_browser():
         applications = [['Bot', 'SPG', 'None']]
         website_browser = ['Space']
         return applications, website_browser
+
+async def create_bat_file():
+    try:
+        if create_bat != False:
+            path = os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve(), 'bot.bat')
+            with open(path, 'w+') as f:
+                f.write('cd ' + os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve()) + '\n')
+                f.write('python main.py')
+            f.close()
+            logger = setup_logger(telegram_integration=True)
+            logger.info('Bot.bat file created at ' + os.path.join(os.path.sep, pathlib.Path(__file__).parent.resolve()))
+    except:
+        pass
 
 async def countdown_timer():
     '''
