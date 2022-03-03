@@ -284,6 +284,8 @@ async def remove_ships_from_fight(app_name=''):
     if remove_flag != False:
         logger.info('Ships were removed from fight!')
 
+    return
+
 async def surrender_on_boss(app_name=''):
     '''
     Function to check if boss is available to surrender.
