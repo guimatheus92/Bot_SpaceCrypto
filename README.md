@@ -63,6 +63,9 @@ The tutorial on how to use Brave browser for this bot can be found on [GitHub Wi
 
 ## Changelog
 
+- **03/03/2022**:
+    - Removed the schedule to send ships to work because we are using the image `zero-ships.png` for that.
+    - Minor fixes in some functions
 - **22/02/2022**:
     - Added `create_bat_file`, `telegram_pic_integration`, `drag_amount`, `surrender_on_boss` parameters
     - Added function to surrender on boss, when boss image is the same as boss available

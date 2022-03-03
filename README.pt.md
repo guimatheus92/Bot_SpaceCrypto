@@ -63,6 +63,9 @@ O tutorial para usar o Brave para este bot pode ser encontrado aqui [GitHub Wiki
 
 ## Atualizações
 
+- **03/03/2022**:
+    - Removido o agendamento para enviar as naves para batalhar, porque ele está usando a imagem `zero-ships.png` para isso.
+    - Pequenos ajustes e correções.
 - **22/02/2022**:
     - Adicionado os parâmetros `create_bat_file`, `telegram_pic_integration`, `drag_amount`, `surrender_on_boss`
     - Adicionado a função de desistir em um determinado chefe de acordo com a imagem salva
