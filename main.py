@@ -10,7 +10,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 try:
     streamConfig = read_configurations()
     refresh_ships_time = streamConfig['game_options']['refresh_ships_time']
-    work_ships_time = streamConfig['game_options']['work_ships_time']
     refresh_browser_time = streamConfig['bot_options']['refresh_browser_time']
     enable_multiaccount = streamConfig['bot_options']['enable_multiaccount']
     chest_screenshot_time = streamConfig['game_options']['chest_screenshot_time']
@@ -81,12 +80,7 @@ async def main():
     if refresh_ships_time > 4:
         logger.info('Scheduling to the refresh game every %s minute(s)!' % (refresh_ships_time))
         # - Do a full review on games        
-        scheduler.add_job(trigger.UpdateSetRefresh, 'interval', minutes=refresh_ships_time, id='1', name='refresh_game', misfire_grace_time=180)        
-
-    if work_ships_time > 9:
-        logger.info('Scheduling the time for ships to fight every %s minute(s)!' % (work_ships_time))
-        # - Send ships to work
-        scheduler.add_job(trigger.UpdateSetWork, 'interval', minutes=work_ships_time, id='2', name='send_ships_to_work', misfire_grace_time=300)
+        scheduler.add_job(trigger.UpdateSetRefresh, 'interval', minutes=refresh_ships_time, id='1', name='refresh_game', misfire_grace_time=180)
 
     if refresh_browser_time > 29:
         logger.info('Scheduling the time for refreshing the browser every %s minute(s)!' % (refresh_browser_time))
@@ -96,7 +90,7 @@ async def main():
     if chest_screenshot_time > 29:
         logger.info('Scheduling to take screenshot from coins every %s minute(s)!' % (chest_screenshot_time))
         # - Do a full review on games        
-        scheduler.add_job(trigger.UpdateSetCoin, 'interval', minutes=chest_screenshot_time, id='4', name='chest_screenshot_time', misfire_grace_time=180)            
+        scheduler.add_job(trigger.UpdateSetCoin, 'interval', minutes=chest_screenshot_time, id='4', name='chest_screenshot_time', misfire_grace_time=180)
 
     if len(scheduler.get_jobs()) > 0:
         scheduler.start()
@@ -119,7 +113,6 @@ async def main():
                 await asyncio.create_task(first_start(app_name=app[1]))
 
             bot_executions_refresh = []
-            bot_executions_work = []
             bot_executions_reload = []
             bot_executions_coin = []
             # Cycle through the bots in one loop rather than restarting the loop in an infinite loop
@@ -147,11 +140,7 @@ async def main():
                 if trigger.set_refresh != False:
                     if app[1] not in bot_executions_refresh:
                         bot_executions_refresh.append(app[1])
-                        await asyncio.create_task(refresh_game(app_name=app[1]))                
-                if trigger.set_work != False:
-                    if app[1] not in bot_executions_work:
-                        bot_executions_work.append(app[1])
-                        await asyncio.create_task(send_ships_to_fight(app_name=app[1], refresh=True))
+                        await asyncio.create_task(refresh_game(app_name=app[1]))
                 if trigger.set_reload != False:
                     if app[1] not in bot_executions_reload:
                         bot_executions_reload.append(app[1])
@@ -165,20 +154,15 @@ async def main():
                 if (len(bot_executions_refresh) == len(applications)) and trigger.set_refresh != False:
                     bot_executions_refresh.clear()
                     trigger.set_refresh = False
-                if (len(bot_executions_work) == len(applications)) and trigger.set_work != False:
-                    bot_executions_work.clear()
-                    trigger.set_work = False
                 if (len(bot_executions_coin) == len(applications)) and trigger.set_coin != False:
                     bot_executions_coin.clear()
                     trigger.set_coin = False
                 if (len(bot_executions_reload) == len(applications)) and trigger.set_reload != False:
                     bot_executions_reload.clear()
-                    bot_executions_work.clear()
                     bot_executions_coin.clear()
                     bot_executions_refresh.clear()
                     trigger.set_reload = False
                     trigger.set_coin = False
-                    trigger.set_work = False
                     trigger.set_refresh = False                                        
         else:
             logger.error('No account/profile found in the config.yaml file or profile do not match with profile opened, please check and restart the bot. Exiting bot...')
